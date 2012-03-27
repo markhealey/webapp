@@ -42,8 +42,11 @@ function updateCacheThenApp() {
 };
 
 function _cachingDone(){
-	$(".progress").removeClass("active");
-	$(".progress .bar").css("width", "0%");
+	window.setTimeout(function(){
+		$(".progress").removeClass("active");
+		$(".progress .bar").css("width", "0%");
+	},1250);
+
 }
 
 function _swapCache(){
