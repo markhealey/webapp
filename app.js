@@ -38,7 +38,13 @@ function updateCacheThenApp() {
 	window.applicationCache.addEventListener('downloading', downloadProgress, false);
 	window.applicationCache.addEventListener("progress", downloadProgress, false);
 	window.applicationCache.addEventListener('updateready', _swapCache, false);
+	window.applicationCache.addEventListener('cached', _cachingDone, false);
 };
+
+function _cachingDone(){
+	$(".progress").removeClass("active");
+	$(".progress .bar").css("width", "0%");
+}
 
 function _swapCache(){
 
