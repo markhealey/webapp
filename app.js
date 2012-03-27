@@ -33,26 +33,43 @@ $("a.pg2").click(function(e){
 });
 
 function updateCacheThenApp() {
-	window.applicationCache.addEventListener('updateready', function(e) {
-	    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-	      // Browser downloaded a new app cache.
-	      // Swap it in and reload the page to get the new hotness.
-	      window.applicationCache.swapCache();
-	      if (confirm('A new version of this app is available. Load it?')) {
-	        //window.location.reload();
-	        window.location.href = "index.html";
-	      }
-	    } else {
-	      // Manifest didn't changed. Nothing new to server.
-	    }
-	  }, false);
+
+	//downloading appcache...
+	window.applicationCache.addEventListener('downloading', downloadProgress, false);
+	window.applicationCache.addEventListener("progress", downloadProgress, false);
+	window.applicationCache.addEventListener('updateready', _swapCache, false);
+};
+
+function _swapCache(){
+
+	window.setTimeout(function(){
+		$(".progress").removeClass("active");
+
+		window.applicationCache.swapCache();
+
+		if (confirm('A new version of this app is available. Reload?')) {
+			window.location.href = "index.html";
+		}
+	},1250);
+}
+
+var total;
+var downloaded;
+
+function downloadProgress(e) {
+	total = e.total;
+	downloaded = e.loaded;
+	$(".progress .bar").css("width", (downloaded/total)*100 + "%");
+	if (downloaded == total && total > 0 && downloaded > 0){
+		total, downloaded = 0;
+	}
 };
 
 $(function(){
-	//if the manifest has changed, notify user
-	updateCacheThenApp();
-
 	keepLinksLocalToWebApp();
-
 	areYouOnline();
 });
+
+
+//if the manifest has changed, notify user
+updateCacheThenApp();

@@ -1,18 +1,22 @@
 CACHE MANIFEST
-#v33333wr
+#2012-03-26-v22cxxsxxxzxwe1
 
-#./index.html (homepage is automatically cached b/c cache manifest is on this)
+# any file with the cache.manifest resource specified implicitly gets added to the offline cache
 
 ./
-./bootstrap.css
-./app.js
 ./jquery.js
+./add2home.js
+./add2home.css
 ./loading.png
 ./apple-touch-icon.png
 ./apple-touch-icon-retina.png
 
+./bootstrap.css
+./app.js
+
+
 NETWORK:
-*
+/Login
+/Api
 
 FALLBACK:
-#*.html ./offline.html
