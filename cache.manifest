@@ -1,0 +1,18 @@
+CACHE MANIFEST
+#v33333wr
+
+#./index.html (homepage is automatically cached b/c cache manifest is on this)
+
+./
+./bootstrap.css
+./app.js
+./jquery.js
+./loading.png
+./apple-touch-icon.png
+./apple-touch-icon-retina.png
+
+NETWORK:
+*
+
+FALLBACK:
+#*.html ./offline.html
